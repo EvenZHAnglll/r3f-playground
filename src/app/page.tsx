@@ -9,7 +9,7 @@ import {
   Text,
   MeshTransmissionMaterial,
 } from "@react-three/drei";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, ThreeElements, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
 import {
@@ -27,6 +27,7 @@ export default function Home() {
         gl={{ alpha: true }}
         camera={{ position: [0, 0, 20], fov: 50 }}
       >
+        <group position={[0, 0, -10]} />
         <color attach="background" args={["#e0e0e0"]} />
         <spotLight
           position={[20, 20, 10]}
@@ -89,21 +90,26 @@ function Rig() {
   });
   return null;
 }
-
-const Knot = (props) => (
+type MeshProps = ThreeElements["mesh"];
+const Knot = (props: MeshProps) => (
   <mesh receiveShadow castShadow {...props}>
     <torusKnotGeometry args={[3, 1, 256, 32]} />
     <MeshTransmissionMaterial thickness={4} />
   </mesh>
 );
 
-function Status(props) {
-  const text = "/Even";
+function Status({ position }: { position?: [number, number, number] }) {
+  const textString = "/Even";
   return (
-    <Text fontSize={14} letterSpacing={-0.025} color="black" {...props}>
-      {text}
+    <Text
+      fontSize={14}
+      letterSpacing={-0.025}
+      color="black"
+      position={position}
+    >
+      {textString}
       <Html style={{ color: "transparent", fontSize: "33.5em" }} transform>
-        {text}
+        {textString}
       </Html>
     </Text>
   );
