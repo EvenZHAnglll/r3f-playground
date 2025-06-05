@@ -18,6 +18,13 @@ import {
   Bloom,
   TiltShift2,
 } from "@react-three/postprocessing";
+import { Doto } from "next/font/google";
+
+const doto = Doto({
+  weight: ["400", "700"],
+  variable: "--font-dosis",
+  subsets: ["latin"],
+});
 
 export default function Home() {
   return (
@@ -94,7 +101,15 @@ type MeshProps = ThreeElements["mesh"];
 const Knot = (props: MeshProps) => (
   <mesh receiveShadow castShadow {...props}>
     <torusKnotGeometry args={[3, 1, 256, 32]} />
-    <MeshTransmissionMaterial thickness={4} />
+    <MeshTransmissionMaterial
+      thickness={4}
+      roughness={0.4}
+      samples={10}
+      ior={1.8}
+      chromaticAberration={0.3}
+      distortion={0.1}
+      clearcoatRoughness={0.2}
+    />
   </mesh>
 );
 
@@ -106,9 +121,14 @@ function Status({ position }: { position?: [number, number, number] }) {
       letterSpacing={-0.025}
       color="black"
       position={position}
+      font={`/Doto-Bold.ttf`}
     >
       {textString}
-      <Html style={{ color: "transparent", fontSize: "33.5em" }} transform>
+      <Html
+        style={{ color: "transparent", fontSize: "33.5em" }}
+        transform
+        className={doto.className}
+      >
         {textString}
       </Html>
     </Text>
