@@ -102,13 +102,14 @@ const Knot = (props: MeshProps) => (
   <mesh receiveShadow castShadow {...props}>
     <torusKnotGeometry args={[3, 1, 256, 32]} />
     <MeshTransmissionMaterial
-      thickness={4}
-      roughness={0.4}
+      thickness={3}
+      roughness={0.2}
       samples={10}
       ior={1.8}
       chromaticAberration={0.3}
       distortion={0.1}
-      clearcoatRoughness={0.2}
+      clearcoat={1}
+      clearcoatRoughness={0.1}
     />
   </mesh>
 );
@@ -119,7 +120,7 @@ function Status({ position }: { position?: [number, number, number] }) {
     <Text
       fontSize={14}
       letterSpacing={-0.025}
-      color="black"
+      color="grey"
       position={position}
       font={`/Doto-Bold.ttf`}
     >
