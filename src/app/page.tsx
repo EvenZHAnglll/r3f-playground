@@ -18,17 +18,13 @@ import {
   Bloom,
   TiltShift2,
 } from "@react-three/postprocessing";
-import { Doto } from "next/font/google";
-
-const doto = Doto({
-  weight: ["400", "700"],
-  variable: "--font-dosis",
-  subsets: ["latin"],
-});
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="w-full h-full">
+    <div className="relative w-full h-full">
       <Canvas
         shadows
         gl={{ alpha: true }}
@@ -73,6 +69,47 @@ export default function Home() {
         </EffectComposer>
         <Rig />
       </Canvas>
+      
+      {/* Navigation Panel */}
+      <div className="absolute top-4 left-4 z-10 flex gap-4">
+        <Card className="p-2 backdrop-blur-lg bg-white/20 shadow-lg">
+          <CardContent className="p-2">
+            <Link href="/vanilla-threejs">
+              <Button variant="ghost" size="sm" className="text-black hover:text-gray-700">
+                → Pure Three.js
+              </Button>
+            </Link>
+          </CardContent>
+        </Card>
+        
+        <Card className="p-2 backdrop-blur-lg bg-white/20 shadow-lg">
+          <CardContent className="p-2">
+            <Link href="/custom-material/grid">
+              <Button variant="ghost" size="sm" className="text-black hover:text-gray-700">
+                Grid Demo
+              </Button>
+            </Link>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Info Panel */}
+      <div className="absolute bottom-4 right-4 z-10">
+        <Card className="p-4 backdrop-blur-lg bg-white/20 shadow-lg text-black">
+          <CardContent className="p-0">
+            <h3 className="text-lg font-semibold mb-2">React Three Fiber</h3>
+            <p className="text-sm opacity-90 mb-2">
+              This scene uses React Three Fiber with declarative syntax.
+            </p>
+            <ul className="text-xs space-y-1">
+              <li>• Declarative React components</li>
+              <li>• R3F ecosystem integration</li>
+              <li>• Automatic disposal</li>
+              <li>• React hooks and state</li>
+            </ul>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }
@@ -127,7 +164,6 @@ function Status({ position }: { position?: [number, number, number] }) {
       <Html
         style={{ color: "transparent", fontSize: "33.5em" }}
         transform
-        className={doto.className}
       >
         {textString}
       </Html>
