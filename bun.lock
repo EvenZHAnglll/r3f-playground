@@ -4,6 +4,7 @@
     "": {
       "name": "next-shadcn-r3f",
       "dependencies": {
+        "3d-tiles-renderer": "^0.4.17",
         "@radix-ui/react-slot": "^1.2.2",
         "@react-spring/three": "^9.7.5",
         "@react-three/drei": "^10.0.7",
@@ -38,6 +39,8 @@
     },
   },
   "packages": {
+    "3d-tiles-renderer": ["3d-tiles-renderer@0.4.17", "", { "peerDependencies": { "@react-three/fiber": "^8.17.9 || ^9.0.0", "react": "^18.3.1 || ^19.0.0", "react-dom": "^18.3.1 || ^19.0.0", "three": ">=0.166.0" }, "optionalPeers": ["@react-three/fiber", "react", "react-dom"] }, "sha512-x/lDlroxZfsfbZsi7a4eA7mAlf0aMStOMS4zgME2fxBJPkW6uf5oPrn6BNfh1loSN2jKJ/YUc0RRDVoZtWUL7g=="],
+
     "@alloc/quick-lru": ["@alloc/quick-lru@5.2.0", "https://registry.npmmirror.com/@alloc/quick-lru/-/quick-lru-5.2.0.tgz", {}, "sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw=="],
 
     "@babel/runtime": ["@babel/runtime@7.27.1", "https://registry.npmmirror.com/@babel/runtime/-/runtime-7.27.1.tgz", {}, "sha512-1x3D2xEk2fRo3PAhwQwu5UubzgiVWSXTBfWpVd2Mx2AzRqJuDJCsgaDVZ7HB5iGzDW1Hl1sWN2mFyKjmR9uAog=="],
