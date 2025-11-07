@@ -61,6 +61,8 @@ const Env: FC = () => {
         preset={preset}
         environmentIntensity={0.5}
         environmentRotation={[0, Math.PI, 0]}
+        background
+        backgroundBlurriness={0.7}
       >
         {lightformer && (
           <group rotation={[-Math.PI / 2, 0, 0]}>
@@ -96,9 +98,9 @@ const Env: FC = () => {
         )}
       </Environment>
       <color attach="background" args={[bg_color]} />
-      <fog attach="fog" args={[bg_color, 25, 35]} />
+      {/* <fog attach="fog" args={[bg_color, 25, 35]} /> */}
       {/* <ambientLight /> */}
-      <mesh position={[0, -0.01, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+      {/* <mesh position={[0, -0.01, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[100, 100]} />
         <MeshReflectorMaterial
           blur={[400, 300]}
@@ -113,7 +115,7 @@ const Env: FC = () => {
           roughness={roughness}
           mirror={0}
         />
-      </mesh>
+      </mesh> */}
     </>
   );
 };
