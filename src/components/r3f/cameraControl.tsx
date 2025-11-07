@@ -28,14 +28,14 @@ const CameraControl: FC = () => {
         position={[-600, 500, 1000]}
         fov={65}
         near={100}
-        far={1000000}
+        far={10000000}
       />
       <CameraControls
         makeDefault
         ref={cameraCtrlRef}
         minPolarAngle={0.1}
         maxPolarAngle={1.4}
-        maxDistance={100000}
+        maxDistance={10000000}
         dollyToCursor
         mouseButtons={{
           left: CamCtrl.ACTION.ROTATE,

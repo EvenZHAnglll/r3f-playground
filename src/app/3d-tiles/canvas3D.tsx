@@ -13,6 +13,7 @@ import {
   GlobeControls,
 } from "3d-tiles-renderer/r3f";
 import {
+  CesiumIonAuthPlugin,
   DebugTilesPlugin,
   GLTFExtensionsPlugin,
 } from "3d-tiles-renderer/plugins";
@@ -21,15 +22,6 @@ import { useCameraStore } from "@/components/r3f/cameraStore";
 import * as THREE from "three";
 import { Button } from "@/components/ui/button";
 import { Env } from "@/components/r3f/environment";
-
-const ktxLoader = new KTX2Loader();
-// .setTranscoderPath(
-// "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/libs/basis/"
-// );
-const dracoLoader = new DRACOLoader();
-// .setDecoderPath(
-// "https://www.gstatic.com/draco/v1/decoders/"
-// );
 
 export function Canvas3D() {
   const tilesetUrl =
@@ -61,19 +53,8 @@ export function Canvas3D() {
     const [dracoLoader, setDracoLoader] = useState<DRACOLoader | null>(null);
 
     const handleLoadModel = ({ scene }: any) => {
-      console.log("Model loaded:", scene);
       scene.traverse((child: any) => {
         if (child.material) {
-          const geometry = child.geometry;
-          console.log("UV attributes:", {
-            uv0: geometry.attributes.uv, // UV channel 0 (默认)
-            uv1: geometry.attributes.uv1, // UV channel 1
-            uv2: geometry.attributes.uv2, // UV channel 2
-          });
-
-          console.log("Original material:", child.material);
-          console.log("Original Map", child.material.map);
-          console.log("ColorSpace:", child.material.map?.colorSpace);
           const mat = new THREE.ShaderMaterial({
             uniforms: {
               uTexture: { value: child.material.map },
@@ -174,12 +155,16 @@ export function Canvas3D() {
     if (!ktxLoader || !dracoLoader) return null;
 
     return (
-      <group>
+      <group rotation-z={Math.PI / 2}>
         <TilesRenderer
           ref={tileRef}
           url={tilesetUrl}
           onLoadModel={handleLoadModel}
           onDisposeModel={handleDisposeModel}
+          group={{
+            position: new THREE.Vector3(-6378137, 10, 0),
+            rotation: new THREE.Euler(0, 0, 0),
+          }}
         >
           <TilesPlugin plugin={DebugTilesPlugin} displayBoxBounds={true} />
           <TilesPlugin
@@ -231,8 +216,8 @@ export function Canvas3D() {
 
         {/* Environment */}
         <Env />
-        <mesh>
-          <boxGeometry args={[100000, 100000, 10000]} />
+        <mesh rotation-x={-Math.PI / 2} position={[0, -0.1, 0]}>
+          <planeGeometry args={[10000, 10000, 100]} />
           <meshStandardMaterial color={"#e0e0e0"} />
         </mesh>
       </Canvas>
